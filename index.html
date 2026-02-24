@@ -83,8 +83,6 @@ strong { font-weight: 700; }
   z-index: 100; font-family: Arial, sans-serif;
   pointer-events: none;
 }
-.slide[data-bg="light"] ~ #counter,
-[data-bg="light"] #counter { color: rgba(0,0,0,0.4); }
 
 /* ========== LOGO ========== */
 .logo {
@@ -105,8 +103,6 @@ strong { font-weight: 700; }
   background: var(--teal);
   color: var(--charcoal);
 }
-.badge-terra { background: var(--terra); color: #fff; }
-.badge-yellow { background: var(--indian-yellow); color: var(--charcoal); }
 
 /* ========== ACCENT ========== */
 .accent { color: var(--teal); }
@@ -128,9 +124,9 @@ strong { font-weight: 700; }
 .quote {
   border-left: 4px solid var(--teal);
   padding: 0.8em 1.2em;
-  margin: 0.8em 0;
+  margin: 0.6em 0;
   font-style: italic;
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-size: clamp(0.78rem, 0.95vw, 0.92rem);
   background: rgba(122,202,197,0.08);
   border-radius: 0 8px 8px 0;
 }
@@ -150,8 +146,6 @@ strong { font-weight: 700; }
   gap: 1.5rem;
   align-items: start;
 }
-.flex-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.flex-col { display: flex; flex-direction: column; gap: 0.6rem; }
 
 /* ========== STAT CARD ========== */
 .stat-card {
@@ -196,13 +190,49 @@ strong { font-weight: 700; }
   line-height: 1.45;
 }
 
+/* ========== SPEAKER BAR CHART ========== */
+.speaker-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.35em;
+  font-size: 0.78rem;
+}
+.speaker-bar-name {
+  width: 7em;
+  text-align: right;
+  padding-right: 0.8em;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--charcoal);
+}
+.speaker-bar-track {
+  flex: 1;
+  height: 1.1em;
+  background: rgba(0,0,0,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.speaker-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  min-width: 2px;
+}
+.speaker-bar-count {
+  width: 2em;
+  padding-left: 0.5em;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: var(--charcoal);
+}
+
 /* ========== SPECTRUM ========== */
 .spectrum-bar {
   position: relative;
   height: 6px;
   border-radius: 3px;
   background: linear-gradient(90deg, var(--teal), var(--indian-yellow), var(--terra));
-  margin: 1.5rem 0 0.8rem;
+  margin: 1rem 0 0.6rem;
 }
 .spectrum-labels {
   display: flex;
@@ -212,27 +242,7 @@ strong { font-weight: 700; }
   text-transform: uppercase;
   letter-spacing: 0.04em;
   opacity: 0.7;
-  margin-bottom: 1.2rem;
-}
-.spectrum-group {
-  padding: 0.8em 1em;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.06);
-  margin-bottom: 0.6em;
-}
-.spectrum-group h4 {
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin-bottom: 0.2em;
-}
-.spectrum-group .names {
-  font-size: 0.75rem;
-  color: var(--teal);
-  margin-bottom: 0.15em;
-}
-.spectrum-group .desc {
-  font-size: 0.75rem;
-  opacity: 0.8;
+  margin-bottom: 0.8rem;
 }
 
 /* ========== COVER SLIDE ========== */
@@ -284,14 +294,6 @@ ol.takeaways li::marker {
   font-family: Georgia, serif;
 }
 
-/* ========== COMPARISON TABLE ========== */
-.compare-col h3 {
-  text-align: center;
-  padding-bottom: 0.4em;
-  border-bottom: 2px solid rgba(255,255,255,0.15);
-  margin-bottom: 0.6em;
-}
-
 /* ========== PICKER OVERLAY ========== */
 #picker {
   position: fixed; top: 0; left: 0;
@@ -339,14 +341,12 @@ ol.takeaways li::marker {
 .mt-2 { margin-top: 1.5rem; }
 .mb-1 { margin-bottom: 0.8rem; }
 .text-center { text-align: center; }
-.nowrap { white-space: nowrap; }
 .src { font-size: 0.7rem; font-style: normal; }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .slide { padding: 3.5rem 5vw 3rem; }
   .two-col, .three-col { grid-template-columns: 1fr; gap: 1rem; }
-  .spectrum-groups-grid { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
@@ -365,67 +365,91 @@ ol.takeaways li::marker {
 <div class="slide bg-mesh active">
   <div class="cover-content">
     <h1>FOMC on AI &amp; Productivity Growth</h1>
-    <p class="subtitle">What Fed Officials Are Saying &mdash; A 12-Month Full-Text Scan</p>
+    <p class="subtitle">What Fed Officials Have Said &mdash; Last 12 Months of FOMC Communications</p>
     <p class="meta">Pau Biosca &nbsp;|&nbsp; Fulcrum Asset Management &nbsp;|&nbsp; February 2026</p>
-    <p class="data-note">Data: 224 FED documents scanned &nbsp;|&nbsp; 84 contain AI/productivity mentions</p>
-    <p class="data-note" style="margin-top:0.3em;">Generated with Claude</p>
+    <p class="data-note">Coverage: 224 documents scanned (speeches, interviews, press conferences, testimony, FOMC Minutes, Beige Books)</p>
+    <p class="data-note">Period: February 2025 &ndash; February 2026</p>
+    <p class="data-note" style="margin-top:0.3em;">Generated with Claude by Anthropic, supervised by Pau Biosca</p>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
 <!-- ==================== SLIDE 2: EXECUTIVE SUMMARY ==================== -->
 <div class="slide bg-dark">
-  <span class="badge">Key Finding</span>
-  <h1>Executive Summary</h1>
+  <span class="badge">Overview</span>
+  <h1>What We Scanned</h1>
   <div class="three-col mt-1">
     <div class="stat-card">
-      <div class="stat-num">84 / 224</div>
-      <div class="stat-label">Documents mention AI <strong>(38%)</strong></div>
+      <div class="stat-num">224</div>
+      <div class="stat-label">Total Fed documents scanned<br>(Feb '25 &ndash; Feb '26)</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">79 of 84</div>
-      <div class="stat-label">Don't have AI in the title <strong>(94%)</strong><br>Invisible to title-only search</div>
+      <div class="stat-num">84</div>
+      <div class="stat-label">Mention AI or productivity <strong>(38%)</strong><br>79 of which don't have AI in the title</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">a few &rarr; several</div>
-      <div class="stat-label">Minutes language escalation<br>(Oct &rsquo;25 to Jan &rsquo;26)</div>
+      <div class="stat-num">20</div>
+      <div class="stat-label">FOMC participants referenced AI<br>across speeches, pressers, testimony</div>
     </div>
   </div>
-  <p class="small mt-2" style="opacity:0.6;text-align:center;">Full-text scan of all 224 FED documents (speeches, interviews, press conferences, testimony, Beige Books, FOMC Minutes). Period: Feb 2025 &ndash; Feb 2026.</p>
+  <p class="small mt-2" style="opacity:0.6;text-align:center;">Documents include: speeches, interviews, press conferences, Congressional testimony, FOMC Minutes (8 meetings), Beige Books (8 editions), YouTube transcripts. Full text scanned, not title-matching.</p>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
-<!-- ==================== SLIDE 3: ENGAGEMENT MAP ==================== -->
+<!-- ==================== SLIDE 3: ENGAGEMENT MAP (VISUAL BAR CHART) ==================== -->
 <div class="slide bg-ivory" data-bg="light">
   <h1>Who's Talking About AI?</h1>
+  <p style="font-size:0.8rem;opacity:0.6;margin-bottom:1rem;">Number of documents (speeches, interviews, pressers) where each participant mentions AI or productivity. Sorted by volume.</p>
   <div class="two-col">
     <div>
-      <h3 style="color:var(--bottle-green);">Dedicated Speeches <span class="small">(5 speakers, 11 talks)</span></h3>
-      <ul class="clean">
-        <li><strong>Jefferson (3):</strong> AI &amp; Economy, AI &amp; FinStab, Supply-side</li>
-        <li><strong>Barr (2+):</strong> AI &amp; Labor Market, AI &amp; Central Banking</li>
-        <li><strong>Waller (2):</strong> Innovation at Speed of AI, Operationalizing AI at Fed</li>
-        <li><strong>Hammack (1):</strong> AI and Jobs</li>
-        <li><strong>Goolsbee (1):</strong> Construction Productivity</li>
-      </ul>
+      <h3 style="color:var(--bottle-green);margin-bottom:0.8em;">Documents Mentioning AI/Productivity</h3>
+      <!-- Waller 13 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Waller</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:100%;background:var(--teal);"></div></div><div class="speaker-bar-count">13</div></div>
+      <!-- Powell 9 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Powell</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:69%;background:var(--teal);"></div></div><div class="speaker-bar-count">9</div></div>
+      <!-- Paulson 9 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Paulson</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:69%;background:var(--teal);"></div></div><div class="speaker-bar-count">9</div></div>
+      <!-- Bostic 7 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Bostic</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:54%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">7</div></div>
+      <!-- Bowman 7 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Bowman</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:54%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">7</div></div>
+      <!-- Goolsbee 7 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Goolsbee</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:54%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">7</div></div>
+      <!-- Cook 6 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Cook</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:46%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">6</div></div>
+      <!-- Williams 6 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Williams</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:46%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">6</div></div>
+      <!-- Miran 6 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Miran</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:46%;background:var(--bright-blue);"></div></div><div class="speaker-bar-count">6</div></div>
+      <!-- Barr 5 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Barr</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:38%;background:var(--bottle-green);"></div></div><div class="speaker-bar-count">5</div></div>
+      <!-- Kashkari 5 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Kashkari</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:38%;background:var(--bottle-green);"></div></div><div class="speaker-bar-count">5</div></div>
+      <!-- Barkin 5 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Barkin</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:38%;background:var(--bottle-green);"></div></div><div class="speaker-bar-count">5</div></div>
+      <!-- Jefferson 4 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Jefferson</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:31%;background:var(--bottle-green);"></div></div><div class="speaker-bar-count">4</div></div>
+      <!-- Daly 4 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Daly</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:31%;background:var(--bottle-green);"></div></div><div class="speaker-bar-count">4</div></div>
+      <!-- Hammack 3 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Hammack</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:23%;background:rgba(0,0,0,0.2);"></div></div><div class="speaker-bar-count">3</div></div>
+      <!-- Collins 1 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Collins</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:8%;background:rgba(0,0,0,0.2);"></div></div><div class="speaker-bar-count">1</div></div>
+      <!-- Logan 1 -->
+      <div class="speaker-bar-row"><div class="speaker-bar-name">Logan</div><div class="speaker-bar-track"><div class="speaker-bar-fill" style="width:8%;background:rgba(0,0,0,0.2);"></div></div><div class="speaker-bar-count">1</div></div>
     </div>
     <div>
-      <h3 style="color:var(--bottle-green);">Incidental Mentions <span class="small">(15+ speakers)</span></h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.3em 1em;font-size:clamp(0.78rem,0.95vw,0.9rem);color:var(--charcoal);">
-        <span><strong>Powell</strong> (9)</span>
-        <span><strong>Waller</strong> (11)</span>
-        <span><strong>Bostic</strong> (7)</span>
-        <span><strong>Paulson</strong> (9)</span>
-        <span><strong>Cook</strong> (6)</span>
-        <span><strong>Bowman</strong> (7)</span>
-        <span><strong>Williams</strong> (6)</span>
-        <span><strong>Kashkari</strong> (5)</span>
-        <span><strong>Barkin</strong> (5)</span>
-        <span><strong>Daly</strong> (4)</span>
-        <span><strong>Miran</strong> (6)</span>
-        <span><strong>Collins</strong> (1)</span>
-        <span><strong>Logan</strong> (1)</span>
+      <h3 style="color:var(--bottle-green);margin-bottom:0.8em;">Dedicated AI Speeches (11 total)</h3>
+      <div class="card" style="font-size:0.8rem;padding:0.8em 1em;">
+        <strong>Jefferson</strong> (3): AI &amp; Economy (Nov 7), AI &amp; FinStab (Nov 21), Supply-side (Feb 6)<br>
+        <strong>Barr</strong> (2): AI &amp; Labor Market (Feb 17), AI &amp; Central Banking (Nov 11)<br>
+        <strong>Waller</strong> (2): Innovation at Speed of AI (Oct 15), Operationalizing AI (Feb 24)<br>
+        <strong>Daly</strong> (1): The AI Moment (Feb 17)<br>
+        <strong>Hammack</strong> (1): AI and Jobs (Dec 21, WSJ)<br>
+        <strong>Goolsbee</strong> (1): Construction Productivity (Oct 1)<br>
+        <strong>Cook</strong> (1): AI &amp; Productivity Panel (Feb 24)
       </div>
+      <p class="small mt-1" style="opacity:0.7;color:var(--charcoal);">The remaining 73 documents mention AI within speeches on other topics (economic outlook, monetary policy, labor markets, financial stability).</p>
     </div>
   </div>
   <img src="logo-light-bg.png" alt="Fulcrum" class="logo">
@@ -435,31 +459,36 @@ ol.takeaways li::marker {
 <div class="slide bg-dark">
   <span class="badge">Theme 1</span>
   <h1>Is the Productivity Boom Real?</h1>
+  <p style="font-size:0.8rem;opacity:0.6;margin-bottom:0.5em;">Where each participant sits on whether the current ~2% productivity growth is driven by AI</p>
   <div class="spectrum-bar"></div>
   <div class="spectrum-labels">
     <span>It's Happening Now</span>
     <span>Not Yet in the Data</span>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.7rem;" class="spectrum-groups-grid">
-    <div class="spectrum-group" style="border-top:3px solid var(--teal);">
-      <h4 style="color:var(--teal);">It's Happening</h4>
-      <div class="names">Powell, Barkin, Paulson, Kashkari, Waller</div>
-      <div class="desc">"2% for 5-6 years is undeniable"</div>
+  <div class="two-col" style="gap:1rem;">
+    <div>
+      <div class="card" style="border-left:4px solid var(--teal);padding:0.7em 1em;margin-bottom:0.5em;">
+        <h3 style="color:var(--teal);font-size:0.85rem;margin-bottom:0.2em;">It's Happening &nbsp; <span style="font-weight:400;opacity:0.7;">Powell, Barkin, Paulson, Kashkari, Waller</span></h3>
+        <p style="font-size:0.78rem;font-style:italic;">"I never thought I would see a time when we had five, six years of 2% productivity growth... if you look at what AI can do"</p>
+        <p style="font-size:0.68rem;opacity:0.6;">Powell, Dec 10 '25 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=Ko-_yb2UkDk" target="_blank">Source</a></p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--indian-yellow);padding:0.7em 1em;margin-bottom:0.5em;">
+        <h3 style="color:var(--indian-yellow);font-size:0.85rem;margin-bottom:0.2em;">AI Is a Contributor &nbsp; <span style="font-weight:400;opacity:0.7;">Jefferson, Bostic, Goolsbee</span></h3>
+        <p style="font-size:0.78rem;font-style:italic;">"Businesses have moved from sandbox experimentation to incorporating [AI] into actual business processes"</p>
+        <p style="font-size:0.68rem;opacity:0.6;">Bostic, Jan 14 '26 Annual Economic Outlook &nbsp;<a href="https://www.atlantafed.org/" target="_blank">Source</a></p>
+      </div>
     </div>
-    <div class="spectrum-group" style="border-top:3px solid var(--indian-yellow);">
-      <h4 style="color:var(--indian-yellow);">AI Is a Contributor</h4>
-      <div class="names">Jefferson, Bostic, Goolsbee</div>
-      <div class="desc">"One factor among several; sandbox to production"</div>
-    </div>
-    <div class="spectrum-group" style="border-top:3px solid var(--terra);">
-      <h4 style="color:var(--terra);">Real but Not AI Yet</h4>
-      <div class="names">Barr, Hammack</div>
-      <div class="desc">"Only 17% of firms; started pre-AI"</div>
-    </div>
-    <div class="spectrum-group" style="border-top:3px solid rgba(255,255,255,0.4);">
-      <h4 style="color:rgba(255,255,255,0.7);">Wait and See</h4>
-      <div class="names">Collins, Daly</div>
-      <div class="desc">"Efficiency mindset broader than AI"</div>
+    <div>
+      <div class="card" style="border-left:4px solid var(--terra);padding:0.7em 1em;margin-bottom:0.5em;">
+        <h3 style="color:var(--terra);font-size:0.85rem;margin-bottom:0.2em;">Real but Not AI Yet &nbsp; <span style="font-weight:400;opacity:0.7;">Barr, Hammack</span></h3>
+        <p style="font-size:0.78rem;font-style:italic;">"Only about 17 percent of businesses report using AI... a gradual diffusion more consistent with historical general-purpose technologies"</p>
+        <p style="font-size:0.68rem;opacity:0.6;">Barr, Feb 17 '26 &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank">Source</a></p>
+      </div>
+      <div class="card" style="border-left:4px solid rgba(255,255,255,0.4);padding:0.7em 1em;margin-bottom:0.5em;">
+        <h3 style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-bottom:0.2em;">Wait and See &nbsp; <span style="font-weight:400;opacity:0.7;">Collins, Daly</span></h3>
+        <p style="font-size:0.78rem;font-style:italic;">"An efficiency mindset... not just AI, although that is part of it and a growing part"</p>
+        <p style="font-size:0.68rem;opacity:0.6;">Collins, Nov 21 '25 &nbsp;<a href="https://www.bostonfed.org/" target="_blank">Source</a></p>
+      </div>
     </div>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
@@ -468,28 +497,31 @@ ol.takeaways li::marker {
 <!-- ==================== SLIDE 5: INFLATION CHANNEL ==================== -->
 <div class="slide bg-gradient-blue">
   <span class="badge">Theme 2</span>
-  <h1>AI's Dual Inflation Channel</h1>
+  <h1>AI &amp; Inflation: What Officials Said</h1>
   <div class="two-col">
     <div class="card">
-      <h3 style="color:var(--teal);">&darr; Downward Pressure</h3>
-      <ul class="clean">
-        <li>Productivity gains reduce unit labor costs</li>
-        <li>Automation lowers service costs</li>
-        <li>Supply chain optimization</li>
-        <li><strong>"Several participants"</strong> see this (Jan '26 Minutes)</li>
-      </ul>
+      <h3 style="color:var(--teal);">&darr; Disinflationary Quotes</h3>
+      <div class="quote" style="font-size:0.76rem;margin:0.4em 0;">
+        "Several participants expected higher productivity growth... to put downward pressure on inflation"
+        <span class="src">&mdash; Jan '26 Minutes, published Feb 18 '26 &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank">Source</a></span>
+      </div>
+      <div class="quote" style="font-size:0.76rem;margin:0.4em 0;">
+        "Technological progress and higher productivity growth, possibly reflecting increasing use of AI, could boost economic growth without generating price pressures"
+        <span class="src">&mdash; Dec '25 Minutes, published Dec 30 '25 &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251210.htm" target="_blank">Source</a></span>
+      </div>
     </div>
     <div class="card">
-      <h3 style="color:var(--terra);">&uarr; Upward Pressure</h3>
-      <ul class="clean">
-        <li>Data center energy demand surging</li>
-        <li>AI-skilled wage premium widening</li>
-        <li>&gt;$1T AI-related debt issuance</li>
-        <li><strong>"Every AI company is an energy company"</strong> &mdash; Waller</li>
-      </ul>
+      <h3 style="color:var(--terra);">&uarr; Inflationary Quotes</h3>
+      <div class="quote" style="font-size:0.76rem;margin:0.4em 0;">
+        "Every AI company I've talked to tells you right out of the gate: I'm an energy company"
+        <span class="src">&mdash; Waller, Dec 17 '25, Yale CEO Summit &nbsp;<a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank">Source</a></span>
+      </div>
+      <div class="quote" style="font-size:0.76rem;margin:0.4em 0;">
+        "Large tech firms increasingly relying on debt to finance" AI capital expenditures
+        <span class="src">&mdash; Dec '25 Minutes, published Dec 30 '25 &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251210.htm" target="_blank">Source</a></span>
+      </div>
     </div>
   </div>
-  <p class="small mt-1" style="text-align:center;opacity:0.8;">Jan '26 Minutes: "Several participants expected higher productivity growth... to put downward pressure on inflation" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></p>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
@@ -501,26 +533,29 @@ ol.takeaways li::marker {
     <div class="card">
       <h3 style="color:var(--teal);">Complement</h3>
       <p class="small" style="opacity:1;color:var(--teal);margin-bottom:0.4em;">Hammack, Barr</p>
-      <p>"Complement to workforce, not replacement" &mdash; augments existing workers</p>
+      <p style="font-size:0.8rem;">"Complement to workforce, not replacement"</p>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Hammack, Dec 21 '25, WSJ Podcast</p>
     </div>
     <div class="card">
       <h3 style="color:var(--indian-yellow);">Substitute</h3>
       <p class="small" style="opacity:1;color:var(--indian-yellow);margin-bottom:0.4em;">Bostic, Goolsbee, Powell</p>
-      <p>Firms moving from sandbox to production; CS majors at highest unemployment; entry-level suppressed</p>
+      <p style="font-size:0.8rem;">Firms from sandbox to production; entry-level hiring suppressed</p>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Bostic, Jan 14 '26 | Goolsbee, Sep 25 '25</p>
     </div>
     <div class="card">
       <h3 style="color:var(--terra);">Structural Shift</h3>
       <p class="small" style="opacity:1;color:var(--terra);margin-bottom:0.4em;">Jefferson, Paulson</p>
-      <p>"AI capex = GDP growth without many workers" &mdash; capital deepening without headcount</p>
+      <p style="font-size:0.8rem;">"AI investments concentrated in data centers that don't require many workers"</p>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Paulson, Jan '26</p>
     </div>
   </div>
   <div class="quote mt-1">
     "Everybody's telling me they're not hiring because they're waiting to figure out what AI can replace"
-    <span class="src">&mdash; Waller at Yale &nbsp;<a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Waller, Dec 17 '25, Yale CEO Summit &nbsp;<a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank">Source</a></span>
   </div>
   <div class="quote">
     "CS majors now have highest unemployment of all majors &mdash; feels very much like it's coming from AI"
-    <span class="src">&mdash; Goolsbee</span>
+    <span class="src">&mdash; Goolsbee, Sep 25 '25, Crain's Power Breakfast</span>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
@@ -528,36 +563,26 @@ ol.takeaways li::marker {
 <!-- ==================== SLIDE 7: FINANCIAL STABILITY ==================== -->
 <div class="slide bg-bottle">
   <span class="badge">Theme 4</span>
-  <h1>Bubble or Boom?</h1>
-  <div class="two-col">
-    <div class="card compare-col">
-      <h3 style="color:var(--terra);text-align:center;">Dot-Com (1999&ndash;2000)</h3>
-      <ul class="clean">
-        <li>Little to no earnings</li>
-        <li>Valuation on "eyeballs"</li>
-        <li>Equity-funded</li>
-      </ul>
-    </div>
-    <div class="card compare-col">
-      <h3 style="color:var(--teal);text-align:center;">AI Era (2024&ndash;2026)</h3>
-      <ul class="clean">
-        <li>Robust revenue and earnings</li>
-        <li>Revenue-based valuations</li>
-        <li>Increasingly <strong>debt-funded</strong> (new risk)</li>
-      </ul>
-    </div>
-  </div>
-  <div class="quote mt-1">
-    "30% of market contacts flag AI as stability risk"
-    <span class="src">&mdash; Jefferson &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/jefferson20251121a.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+  <h1>Financial Stability Concerns Around AI</h1>
+  <div class="quote">
+    "30% of market contacts flag AI as a potential stability risk"
+    <span class="src">&mdash; Jefferson, Nov 21 '25 &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/jefferson20251121a.htm" target="_blank">Source</a></span>
   </div>
   <div class="quote">
-    "This isn't like some sock puppet, this is actual real technology"
-    <span class="src">&mdash; Waller &nbsp;<a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    "Large tech firms increasingly relying on debt to finance AI capital expenditures... elevated equity valuations and concentration risk in AI sector"
+    <span class="src">&mdash; Dec '25 and Jan '26 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank">Source</a></span>
   </div>
   <div class="quote">
-    Risk: &gt;$1T in AI-related debt issuance
-    <span class="src">&mdash; Barr &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    "Some participants discussed potential vulnerabilities associated with recent developments in the AI sector"
+    <span class="src">&mdash; Jan '26 FOMC Minutes, published Feb 18 '26 &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank">Source</a></span>
+  </div>
+  <div class="two-col mt-1">
+    <div class="card" style="padding:0.8em 1em;">
+      <p style="font-size:0.8rem;">Jefferson (Nov 21 '25) noted AI firms have "robust revenue streams and strong earnings" unlike the dot-com era, but flagged the shift to <strong>debt-funded</strong> AI investment as a new risk.</p>
+    </div>
+    <div class="card" style="padding:0.8em 1em;">
+      <p style="font-size:0.8rem;">Barr (Feb 17 '26) cited <strong>&gt;$1T in AI-related debt issuance</strong> and warned that in a stall scenario, this creates "financial stability risk from credit losses." &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank">Source</a></p>
+    </div>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
@@ -565,32 +590,32 @@ ol.takeaways li::marker {
 <!-- ==================== SLIDE 8: POWELL DEEP DIVE ==================== -->
 <div class="slide bg-dark">
   <span class="badge">The Chair</span>
-  <h1>Jerome Powell &mdash; 9 Documents, All Incidental</h1>
+  <h1>Jerome Powell &mdash; 9 Documents</h1>
+  <p style="font-size:0.78rem;opacity:0.6;margin-bottom:0.6em;">AI discussed in every press conference since October 2025, within broader economic outlook remarks.</p>
   <div class="quote">
     "I never thought I would see a time when we had five, six years of 2% productivity growth... if you look at what AI can do..."
-    <span class="src">&mdash; Dec '25 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=Ko-_yb2UkDk" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Dec 10 '25 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=Ko-_yb2UkDk" target="_blank">Source</a></span>
   </div>
   <div class="quote">
     "We're benefiting from the AI buildout of data centers"
-    <span class="src">&mdash; Jan '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Jan 28 '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank">Source</a></span>
   </div>
   <div class="quote">
     "Higher productivity means higher potential output and it changes the way you think about potentially inflation, growth, labor market"
-    <span class="src">&mdash; Jan '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Jan 28 '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank">Source</a></span>
   </div>
   <div class="quote">
     "There is some connection it appears between the low hiring rate for recent college grads and AI"
-    <span class="src">&mdash; Jan '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Jan 28 '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank">Source</a></span>
   </div>
-  <p class="small mt-1" style="opacity:0.6;">Powell discussed AI in every press conference since October 2025, always in response to questions or within broader economic outlook remarks.</p>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
 <!-- ==================== SLIDE 9: WALLER DEEP DIVE ==================== -->
 <div class="slide bg-teal" data-bg="teal">
   <span class="badge" style="background:var(--bottle-green);color:#fff;">Governor, 13 Documents</span>
-  <h1 style="color:var(--charcoal);">Christopher Waller &mdash; The Key Video</h1>
-  <p style="margin-bottom:0.8em;font-weight:700;color:var(--bottle-green);">Yale CEO Summit, Dec 17, 2025</p>
+  <h1 style="color:var(--charcoal);">Christopher Waller</h1>
+  <p style="margin-bottom:0.6em;font-weight:700;color:var(--bottle-green);">Yale CEO Summit, Dec 17, 2025 &nbsp;<a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--bottle-green);">Watch</a></p>
   <div class="quote">
     "And then AI AI AI AI &mdash; that is all I have heard since the summer"
     <span class="src"><a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--bottle-green);text-decoration:underline dotted;">Source</a></span>
@@ -607,46 +632,42 @@ ol.takeaways li::marker {
     "Every AI company I've talked to tells you right out of the gate: I'm an energy company"
     <span class="src"><a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--bottle-green);text-decoration:underline dotted;">Source</a></span>
   </div>
-  <div class="quote">
-    IBM CEO to Waller: "Lowest voluntary attrition in 30 years... productivity from AI is abundant and clear"
-    <span class="src"><a href="https://www.youtube.com/watch?v=2Z1PJ1dywbs" target="_blank" style="color:var(--bottle-green);text-decoration:underline dotted;">Source</a></span>
-  </div>
   <div class="card mt-1" style="background:var(--bottle-green);color:#fff;">
-    <strong>Today's speech (Feb 24):</strong> "In my lifetime, I have never seen a technological revolution like this" &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/waller20260224a.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a>
+    <strong>Feb 24 '26:</strong> "In my lifetime, I have never seen a technological revolution like this" &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/waller20260224a.htm" target="_blank" style="color:var(--teal);">Source</a>
   </div>
   <img src="logo-light-bg.png" alt="Fulcrum" class="logo">
 </div>
 
 <!-- ==================== SLIDE 10: JEFFERSON & BARR ==================== -->
 <div class="slide bg-dark">
-  <h1>Jefferson &amp; Barr &mdash; Deep Dives</h1>
+  <h1>Jefferson &amp; Barr</h1>
   <div class="two-col">
     <div>
       <h3><span class="accent">Philip Jefferson</span> <span class="small">(Vice Chair) &mdash; 3 Dedicated Speeches</span></h3>
-      <ul class="clean">
-        <li>800M+ weekly ChatGPT users, 45%+ worker adoption</li>
-        <li>Dot-com comparison: "robust earnings" differentiate this era</li>
-        <li>Dual inflation channel &mdash; both disinflationary and inflationary forces</li>
-        <li>30% of market contacts flag AI as a stability risk</li>
-      </ul>
-      <p class="mt-1"><a href="https://www.federalreserve.gov/newsevents/speech/jefferson20251121a.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Speech: AI &amp; Financial Stability (Nov '25)</a></p>
+      <div class="quote" style="font-size:0.76rem;">
+        "ChatGPT now has 800M+ weekly active users. 45%+ of workers report using AI."
+        <span class="src">&mdash; Nov 7 '25, "AI and the Economy" &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/jefferson20251107a.htm" target="_blank">Source</a></span>
+      </div>
+      <div class="quote" style="font-size:0.76rem;">
+        "30% of market contacts flag AI as a stability risk... robust earnings differentiate from dot-com"
+        <span class="src">&mdash; Nov 21 '25, "AI &amp; Financial Stability" &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/jefferson20251121a.htm" target="_blank">Source</a></span>
+      </div>
     </div>
     <div>
-      <h3><span class="accent">Michael Barr</span> <span class="small">&mdash; Three Scenarios</span></h3>
-      <div class="card" style="padding:0.8em 1em;margin-bottom:0.4em;">
-        <strong style="color:var(--teal);">Scenario 1 (Gradual, most likely):</strong><br>
-        AI = normal GPT like electricity. Manageable displacement.
+      <h3><span class="accent">Michael Barr</span> <span class="small">&mdash; Three Scenarios (Feb 17 '26) &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank" style="font-weight:400;">Source</a></span></h3>
+      <div class="card" style="padding:0.6em 1em;margin-bottom:0.3em;">
+        <strong style="color:var(--teal);">Scenario 1 (Gradual):</strong>
+        <span style="font-size:0.8rem;">AI = normal GPT like electricity. Manageable displacement. <em>"Most consistent with current evidence"</em> per Barr.</span>
       </div>
-      <div class="card" style="padding:0.8em 1em;margin-bottom:0.4em;">
-        <strong style="color:var(--indian-yellow);">Scenario 2 (Rapid):</strong><br>
-        "Jobless boom." Mass displacement. Stagflationary risk.
+      <div class="card" style="padding:0.6em 1em;margin-bottom:0.3em;">
+        <strong style="color:var(--indian-yellow);">Scenario 2 (Rapid):</strong>
+        <span style="font-size:0.8rem;">Mass professional job displacement. Society rethinks safety nets.</span>
       </div>
-      <div class="card" style="padding:0.8em 1em;margin-bottom:0.4em;">
-        <strong style="color:var(--terra);">Scenario 3 (Stall):</strong><br>
-        Plateau, dot-com bust, &gt;$1T wasted debt.
+      <div class="card" style="padding:0.6em 1em;margin-bottom:0.3em;">
+        <strong style="color:var(--terra);">Scenario 3 (Stall):</strong>
+        <span style="font-size:0.8rem;">Plateau from data/energy constraints. &gt;$1T in wasted debt.</span>
       </div>
-      <p class="small mt-1" style="opacity:0.8;">Only 17% of firms use AI &mdash; large 75%, small &lt;10%</p>
-      <p><a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Speech: AI &amp; Labor Market (Feb '26)</a></p>
+      <p class="small mt-1" style="opacity:0.8;">Barr cited: 17% all firms using AI, 75% large, &lt;10% small (Census BTOS survey).</p>
     </div>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
@@ -658,21 +679,30 @@ ol.takeaways li::marker {
   <div class="three-col">
     <div class="card">
       <h3 style="color:var(--bottle-green);">Raphael Bostic</h3>
-      <p class="small" style="opacity:1;color:var(--bottle-green);">Atlanta Fed President</p>
-      <p style="color:var(--charcoal);">"Firms moved from sandbox to actual processes; entry-level hiring suppressed"</p>
-      <p class="mt-1 small" style="opacity:0.8;">Grounded in business contacts across the Sixth District</p>
+      <p class="small" style="opacity:1;color:var(--bottle-green);">Atlanta Fed President &mdash; 7 documents</p>
+      <div class="quote" style="font-size:0.76rem;border-left-color:var(--bottle-green);">
+        "Firms moved from sandbox experimentation to incorporating AI into actual business processes; entry-level hiring suppressed"
+      </div>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Jan 14 '26, Annual Economic Outlook &nbsp;<a href="https://www.atlantafed.org/" target="_blank" style="color:var(--bottle-green);">Source</a></p>
+      <p style="font-size:0.68rem;opacity:0.6;">Also: Oct 24 '25 at Fisk University, Nov 18 '25 Speech</p>
     </div>
     <div class="card">
       <h3 style="color:var(--bottle-green);">Austan Goolsbee</h3>
-      <p class="small" style="opacity:1;color:var(--bottle-green);">Chicago Fed President</p>
-      <p style="color:var(--charcoal);">"CS majors have highest unemployment of all majors"</p>
-      <p class="mt-1 small" style="opacity:0.8;">Construction productivity also tied to tech adoption</p>
+      <p class="small" style="opacity:1;color:var(--bottle-green);">Chicago Fed President &mdash; 7 documents</p>
+      <div class="quote" style="font-size:0.76rem;border-left-color:var(--bottle-green);">
+        "CS majors have the highest unemployment of all college majors &mdash; feels very much like it's coming from AI"
+      </div>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Sep 25 '25, Crain's Power Breakfast</p>
+      <p style="font-size:0.68rem;opacity:0.6;">Also: Oct 1 '25 Construction Productivity &nbsp;<a href="https://www.youtube.com/watch?v=B21riliKitA" target="_blank" style="color:var(--bottle-green);">Watch</a></p>
     </div>
     <div class="card">
       <h3 style="color:var(--bottle-green);">Lisa Cook</h3>
-      <p class="small" style="opacity:1;color:var(--bottle-green);">Governor</p>
-      <p style="color:var(--charcoal);">"AI as GPT on par with the steam engine"</p>
-      <p class="mt-1 small" style="opacity:0.8;">GenAI in trading, ML in credit risk &mdash; Financial Stability lens</p>
+      <p class="small" style="opacity:1;color:var(--bottle-green);">Governor &mdash; 6 documents</p>
+      <div class="quote" style="font-size:0.76rem;border-left-color:var(--bottle-green);">
+        "AI as a general-purpose technology, on par with the steam engine... democratizing innovation"
+      </div>
+      <p style="font-size:0.68rem;opacity:0.6;margin-top:0.3em;">Feb 24 '26, AI &amp; Productivity Panel &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/cook20260224a.htm" target="_blank" style="color:var(--bottle-green);">Source</a></p>
+      <p style="font-size:0.68rem;opacity:0.6;">Nov 20 '25: GenAI in trading, ML in credit risk &mdash; financial stability lens</p>
     </div>
   </div>
   <img src="logo-light-bg.png" alt="Fulcrum" class="logo">
@@ -685,56 +715,56 @@ ol.takeaways li::marker {
   <div class="three-col">
     <div class="stat-card">
       <div class="stat-num">800M+</div>
-      <div class="stat-label">Weekly ChatGPT users<br><span class="small">(was 500M Mar '25) &mdash; Jefferson</span></div>
+      <div class="stat-label">Weekly ChatGPT users<br><span class="small">(was 500M Mar '25) &mdash; Jefferson, Nov 7 '25</span></div>
     </div>
     <div class="stat-card">
       <div class="stat-num">45%+</div>
-      <div class="stat-label">Workers reporting AI use<br><span class="small">(was 30% Dec '24) &mdash; Jefferson</span></div>
+      <div class="stat-label">Workers reporting AI use<br><span class="small">(was 30% Dec '24) &mdash; Jefferson, Nov 7 '25</span></div>
     </div>
     <div class="stat-card">
       <div class="stat-num">17%</div>
-      <div class="stat-label">All firms using AI<br><span class="small">75% large, &lt;10% small &mdash; Barr</span></div>
+      <div class="stat-label">All firms using AI<br><span class="small">75% large, &lt;10% small &mdash; Barr, Feb 17 '26</span></div>
     </div>
   </div>
   <div class="two-col mt-2">
     <div class="card">
       <h3 style="color:var(--terra);">&gt;$1T</h3>
-      <p>AI-related debt issuance cited by Barr (Feb '26)</p>
-      <p class="small">&mdash; Barr</p>
+      <p>AI-related debt issuance</p>
+      <p class="small">&mdash; Barr, Feb 17 '26 &nbsp;<a href="https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm" target="_blank">Source</a></p>
     </div>
     <div class="card">
       <h3 style="color:var(--teal);">Capital Reallocation</h3>
-      <p>"Business fixed investment, if you strip out AI, it's declining" &mdash; Waller</p>
-      <p class="small mt-1">"Almost every meeting with a business leader comes to AI" &mdash; Hammack</p>
+      <p>"Business fixed investment, if you strip out AI, it's declining" &mdash; Waller, Dec 17 '25</p>
+      <p class="small mt-1">"Almost every meeting with a business leader comes to AI" &mdash; Hammack, Dec 21 '25</p>
     </div>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
-<!-- ==================== SLIDE 13: MINUTES ESCALATION ==================== -->
+<!-- ==================== SLIDE 13: MINUTES PROGRESSION ==================== -->
 <div class="slide bg-gradient-blue">
   <span class="badge">FOMC Minutes</span>
-  <h1>FOMC Minutes: Language Escalation</h1>
+  <h1>FOMC Minutes: Language Progression</h1>
   <div class="timeline mt-1">
     <div class="timeline-item">
-      <div class="tl-date">Aug '25</div>
-      <div class="tl-text">Background mention &mdash; AI as market valuation story</div>
+      <div class="tl-date">Jul 30 '25 meeting (published Aug 20)</div>
+      <div class="tl-text">Background mention &mdash; AI as market valuation story &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20250730.htm" target="_blank" style="color:var(--teal);">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Oct '25</div>
-      <div class="tl-text"><strong>"A couple" / "A few"</strong> participants see productivity reducing inflation &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20250918.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></div>
+      <div class="tl-date">Sep 17 '25 meeting (published Oct 8)</div>
+      <div class="tl-text"><strong>"A couple" / "A few"</strong> participants see productivity reducing inflation &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20250917.htm" target="_blank" style="color:var(--teal);">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Nov '25</div>
-      <div class="tl-text"><strong>"A few"</strong> + <strong>"Many"</strong> note AI investment trends &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251107.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></div>
+      <div class="tl-date">Oct 29 '25 meeting (published Nov 19)</div>
+      <div class="tl-text"><strong>"A few"</strong> + <strong>"Many"</strong> note AI investment trends &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251029.htm" target="_blank" style="color:var(--teal);">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Dec '25</div>
-      <div class="tl-text">Explicit AI-productivity-inflation link in staff assessment; "increasingly relying on debt" for AI capex &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251218.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></div>
+      <div class="tl-date">Dec 10 '25 meeting (published Dec 30)</div>
+      <div class="tl-text">Explicit AI-productivity-inflation link in staff assessment; "increasingly relying on debt" for AI capex &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251210.htm" target="_blank" style="color:var(--teal);">Source</a></div>
     </div>
     <div class="timeline-item" style="font-size:1.05em;">
-      <div class="tl-date" style="font-size:1.1em;">Jan '26</div>
-      <div class="tl-text"><strong style="color:var(--indian-yellow);">"SEVERAL"</strong> participants &mdash; meaningful upgrade from "a few" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></div>
+      <div class="tl-date" style="font-size:1.1em;">Jan 28 '26 meeting (published Feb 18)</div>
+      <div class="tl-text"><strong style="color:var(--indian-yellow);">"SEVERAL"</strong> participants expect productivity-driven disinflation &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);">Source</a></div>
     </div>
   </div>
   <div class="card mt-1" style="text-align:center;font-size:0.85rem;">
@@ -745,28 +775,28 @@ ol.takeaways li::marker {
 
 <!-- ==================== SLIDE 14: BEIGE BOOK ==================== -->
 <div class="slide bg-dark">
-  <span class="badge">Anecdotal Data</span>
+  <span class="badge">Beige Books</span>
   <h1>Beige Book: AI in Business Contacts</h1>
   <div class="timeline mt-1">
     <div class="timeline-item">
-      <div class="tl-date">Jul '25</div>
-      <div class="tl-text">"Employers ramped up investments in automation and AI aimed at reducing the need for additional hiring"</div>
+      <div class="tl-date">Jul 16 '25</div>
+      <div class="tl-text">"Employers ramped up investments in automation and AI aimed at reducing the need for additional hiring" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/beigebook202507-summary.htm" target="_blank">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Sep '25</div>
-      <div class="tl-text">"Greater automation, including new AI tools" facilitating headcount reduction</div>
+      <div class="tl-date">Sep 3 '25</div>
+      <div class="tl-text">"Greater automation, including new AI tools" facilitating headcount reduction &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/beigebook202508-summary.htm" target="_blank">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Oct '25</div>
-      <div class="tl-text">"Contacts citing increased investment in artificial intelligence technologies"</div>
+      <div class="tl-date">Oct 15 '25</div>
+      <div class="tl-text">"Contacts citing increased investment in artificial intelligence technologies" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/beigebook202510-summary.htm" target="_blank">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Nov '25</div>
-      <div class="tl-text">"AI replaced entry-level positions or made existing workers productive enough to curb new hiring"</div>
+      <div class="tl-date">Nov 26 '25</div>
+      <div class="tl-text">"AI replaced entry-level positions or made existing workers productive enough to curb new hiring" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/beigebook202511-summary.htm" target="_blank">Source</a></div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Jan '26</div>
-      <div class="tl-text">"Multiple contacts reported exploring AI implementation primarily for productivity enhancement"</div>
+      <div class="tl-date">Jan 14 '26</div>
+      <div class="tl-text">"Multiple contacts reported exploring AI implementation primarily for productivity enhancement" &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/beigebook202601-summary.htm" target="_blank">Source</a></div>
     </div>
   </div>
   <p class="small mt-1" style="opacity:0.6;">5 of the last 8 Beige Book editions contain explicit AI or automation references.</p>
@@ -775,31 +805,31 @@ ol.takeaways li::marker {
 
 <!-- ==================== SLIDE 15: CONSENSUS TIMELINE ==================== -->
 <div class="slide bg-dark">
-  <h1>Evolving Consensus Timeline</h1>
+  <h1>Timeline of AI Discussion</h1>
   <div class="timeline mt-1">
     <div class="timeline-item">
-      <div class="tl-date">Feb &ndash; Jul '25 &mdash; SCATTERED</div>
-      <div class="tl-text">Background mentions in outlook speeches. No dedicated analysis.</div>
+      <div class="tl-date">Feb &ndash; Jul '25</div>
+      <div class="tl-text">Background mentions in outlook speeches. Cook opens "Productivity Dynamics" panel (May 9). Barr gives 3 AI speeches (Feb, Apr, May).</div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Aug &ndash; Sep '25 &mdash; BACKGROUND</div>
-      <div class="tl-text">AI as market valuation story. Barkin sees "visible productivity boom."</div>
+      <div class="tl-date">Aug &ndash; Sep '25</div>
+      <div class="tl-text">AI appears in Minutes as market valuation story. Barkin: "visible productivity boom." Goolsbee: CS major unemployment.</div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Oct &ndash; Nov '25 &mdash; DEDICATED ANALYSIS</div>
-      <div class="tl-text">Jefferson (3), Barr (1), Waller (1). Cook FinStab deep dive. Kashkari + OpenAI. "A few" in Minutes.</div>
+      <div class="tl-date">Oct &ndash; Nov '25</div>
+      <div class="tl-text">Jefferson gives 3 dedicated speeches. Waller: "Innovation at Speed of AI" (Oct 15). Cook: FinStab deep dive (Nov 20). Kashkari talks to OpenAI economist (Oct 9). "A few" in Minutes.</div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Dec '25 &mdash; MAINSTREAMING</div>
-      <div class="tl-text">Powell Dec presser "2% for 5-6 years." Waller at Yale "AI AI AI AI." Staff assessment explicit.</div>
+      <div class="tl-date">Dec '25</div>
+      <div class="tl-text">Powell Dec presser: "2% for 5-6 years... if you look at what AI can do." Waller at Yale: "AI AI AI AI is all I've heard." Staff assessment makes AI-productivity link explicit in Minutes.</div>
     </div>
     <div class="timeline-item">
-      <div class="tl-date">Jan '26 &mdash; INCORPORATING INTO FORECASTS</div>
-      <div class="tl-text">"Several" in Minutes. Bostic sandbox to production. Paulson's paradox.</div>
+      <div class="tl-date">Jan '26</div>
+      <div class="tl-text">"Several" in Minutes (up from "a few"). Bostic: sandbox to production. Powell: "connection between low hiring and AI."</div>
     </div>
     <div class="timeline-item" style="font-size:1.05em;">
-      <div class="tl-date" style="font-size:1.05em;color:var(--indian-yellow);">Feb '26 &mdash; OPERATIONALIZING</div>
-      <div class="tl-text">Barr 3-scenario framework. Cook + Waller dedicated speeches. Fed deploying AI internally.</div>
+      <div class="tl-date" style="font-size:1.05em;color:var(--indian-yellow);">Feb '26</div>
+      <div class="tl-text">Barr publishes 3-scenario framework (Feb 17). Daly: "The AI Moment" (Feb 17). Cook + Waller give dedicated speeches (Feb 24). Fed deploying AI internally.</div>
     </div>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
@@ -811,35 +841,35 @@ ol.takeaways li::marker {
   <h1>What Officials Said About AI &amp; Policy</h1>
   <div class="quote">
     "Several participants expected higher productivity growth associated with technological or regulatory developments to put downward pressure on inflation"
-    <span class="src">&mdash; Jan '26 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Jan 28 '26 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);">Source</a></span>
   </div>
   <div class="quote">
     "Higher productivity means higher potential output and it changes the way you think about potentially inflation, growth, labor market"
-    <span class="src">&mdash; Powell, Jan '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Powell, Jan 28 '26 Press Conference &nbsp;<a href="https://www.youtube.com/watch?v=9_ay0mpQaWQ" target="_blank" style="color:var(--teal);">Source</a></span>
   </div>
   <div class="quote">
     "Several participants judged that ongoing gains in productivity would be supportive of economic growth"
-    <span class="src">&mdash; Jan '26 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Jan 28 '26 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260128.htm" target="_blank" style="color:var(--teal);">Source</a></span>
   </div>
   <div class="quote">
     "Structural factors such as technological progress and higher productivity growth, possibly reflecting increasing use of AI, could boost economic growth without generating price pressures and could also damp job creation"
-    <span class="src">&mdash; Dec '25 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251218.htm" target="_blank" style="color:var(--teal);text-decoration:underline dotted;">Source</a></span>
+    <span class="src">&mdash; Dec 10 '25 FOMC Minutes &nbsp;<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20251210.htm" target="_blank" style="color:var(--teal);">Source</a></span>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
 
-<!-- ==================== SLIDE 17: KEY TAKEAWAYS ==================== -->
+<!-- ==================== SLIDE 17: SUMMARY ==================== -->
 <div class="slide bg-dark">
   <h1>Summary of What Was Said</h1>
   <ol class="takeaways" style="max-width:58em;">
     <li><strong>84 of 224 documents (38%)</strong> mention AI or productivity &mdash; 79 of those do not have AI in the title</li>
     <li><strong>Minutes language shifted</strong> from "a few" (Oct-Nov '25) to "several" (Jan '26) participants citing productivity-driven disinflation</li>
     <li><strong>Powell</strong> (every presser since Oct '25): "2% productivity for 5-6 years"; "AI buildout boosting GDP"; "connection to low hiring of recent college grads"</li>
-    <li><strong>Waller</strong> (13 docs): "AI is all I've heard since summer"; "business investment ex-AI is declining"; "in my lifetime, never seen a revolution like this"</li>
-    <li><strong>Barr</strong> (Feb '26): Three scenarios framework &mdash; gradual GPT (most likely per Barr), rapid displacement, or stall. Only 17% of firms use AI.</li>
-    <li><strong>Bostic, Goolsbee:</strong> Firms moved from "sandbox to production"; CS majors at highest unemployment of all majors</li>
-    <li><strong>Beige Book</strong> 5 of last 8 editions mention AI/automation in context of firms substituting technology for labor</li>
-    <li><strong>Financial stability:</strong> Jefferson cites 30% of contacts flagging AI risk; &gt;$1T AI debt issuance; concentration in mega-caps (Minutes)</li>
+    <li><strong>Waller</strong> (13 docs, Dec '25): "AI is all I've heard since summer"; "business investment ex-AI is declining"; (Feb '26): "never seen a revolution like this"</li>
+    <li><strong>Barr</strong> (Feb 17 '26): Three scenarios &mdash; gradual GPT ("most consistent with current evidence" per Barr), rapid displacement, or stall. Only 17% of firms use AI.</li>
+    <li><strong>Bostic</strong> (Jan '26): Firms moved from "sandbox to production." <strong>Goolsbee</strong> (Sep '25): CS majors at highest unemployment of all majors.</li>
+    <li><strong>Beige Book:</strong> 5 of last 8 editions mention AI/automation in context of firms substituting technology for labor</li>
+    <li><strong>Financial stability:</strong> Jefferson (Nov '25) cites 30% of contacts flagging AI risk; Barr (Feb '26): &gt;$1T AI debt issuance; Minutes flag concentration in mega-caps</li>
   </ol>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
@@ -850,8 +880,7 @@ ol.takeaways li::marker {
     <h1>Sources &amp; Methodology</h1>
     <div style="max-width:48em;text-align:left;margin:0 auto;">
       <p style="margin-bottom:1em;font-size:clamp(0.82rem,1vw,0.95rem);">
-        Full-text scan of <strong>224 FED documents</strong> from internal database: speeches, interviews,
-        press conferences, testimony, Beige Books, and FOMC Minutes.
+        Full-text scan of <strong>224 Fed documents</strong> from internal database covering the last 12 months of FOMC communications: speeches, interviews, press conferences, Congressional testimony, FOMC Minutes (8 meetings), and Beige Books (8 editions).
       </p>
       <p style="margin-bottom:1em;font-size:clamp(0.82rem,1vw,0.95rem);">
         <strong>Keywords:</strong> artificial intelligence, AI, machine learning, generative AI, productivity, automation.
@@ -869,7 +898,7 @@ ol.takeaways li::marker {
       </div>
     </div>
     <p class="meta mt-2">Pau Biosca &nbsp;|&nbsp; Fulcrum Asset Management &nbsp;|&nbsp; February 2026</p>
-    <p class="data-note" style="margin-top:0.5em;">Generated with Claude</p>
+    <p class="data-note" style="margin-top:0.5em;">Generated with Claude by Anthropic, supervised by Pau Biosca</p>
   </div>
   <img src="logo-dark-bg.png" alt="Fulcrum" class="logo">
 </div>
@@ -887,25 +916,24 @@ ol.takeaways li::marker {
 (function(){
   'use strict';
 
-  /* ---------- Slide titles for picker ---------- */
   var titles = [
     'Cover',
-    'Executive Summary',
-    'Engagement Map: Who\'s Talking',
-    'Theme 1: Productivity Spectrum',
-    'Theme 2: Inflation Channel',
-    'Theme 3: Labor Market Impact',
-    'Theme 4: Financial Stability',
-    'Powell Deep Dive',
-    'Waller Deep Dive',
-    'Jefferson & Barr Deep Dives',
+    'What We Scanned',
+    'Who\'s Talking About AI',
+    'Productivity Spectrum',
+    'AI & Inflation Quotes',
+    'Labor Market Impact',
+    'Financial Stability Concerns',
+    'Powell Quotes',
+    'Waller Quotes',
+    'Jefferson & Barr',
     'Bostic, Goolsbee & Cook',
     'Adoption Metrics',
     'Minutes: Language Progression',
-    'Beige Book Evidence',
-    'Consensus Timeline',
-    'AI & Policy: What Was Said',
-    'Summary of What Was Said',
+    'Beige Book Quotes',
+    'Timeline of AI Discussion',
+    'AI & Policy Quotes',
+    'Summary',
     'Sources & Methodology'
   ];
 
@@ -917,7 +945,6 @@ ol.takeaways li::marker {
   var picker   = document.getElementById('picker');
   var pickerGrid = document.getElementById('pickerGrid');
 
-  /* ---------- Build picker ---------- */
   titles.forEach(function(t, i){
     var el = document.createElement('div');
     el.className = 'picker-item';
@@ -926,7 +953,6 @@ ol.takeaways li::marker {
     pickerGrid.appendChild(el);
   });
 
-  /* ---------- Navigation helpers ---------- */
   function goTo(n){
     if(n < 0) n = 0;
     if(n >= total) n = total - 1;
@@ -941,19 +967,15 @@ ol.takeaways li::marker {
   function updateUI(){
     progress.style.width = ((cur + 1) / total * 100) + '%';
     counter.textContent = (cur + 1) + ' / ' + total;
-    /* Adjust counter color based on slide background */
     var bg = slides[cur].getAttribute('data-bg');
     counter.style.color = (bg === 'light' || bg === 'teal')
       ? 'rgba(0,0,0,0.4)'
       : 'rgba(255,255,255,0.5)';
   }
 
-  /* ---------- Picker ---------- */
   function openPicker(){ picker.classList.add('open'); }
   function closePicker(){ picker.classList.remove('open'); }
-  function togglePicker(){ picker.classList.contains('open') ? closePicker() : openPicker(); }
 
-  /* ---------- Keyboard ---------- */
   document.addEventListener('keydown', function(e){
     if(picker.classList.contains('open')){
       if(e.key === 'Escape' || e.key === 'g' || e.key === 'G') closePicker();
@@ -969,15 +991,13 @@ ol.takeaways li::marker {
     }
   });
 
-  /* ---------- Click (left 33% = prev, rest = next) ---------- */
   document.querySelector('.deck').addEventListener('click', function(e){
-    if(e.target.closest('a')) return;            /* don't intercept links */
+    if(e.target.closest('a')) return;
     if(picker.classList.contains('open')) return;
     var x = e.clientX / window.innerWidth;
     x < 0.33 ? prev() : next();
   });
 
-  /* ---------- Touch swipe ---------- */
   var touchX0 = null;
   document.addEventListener('touchstart', function(e){
     if(picker.classList.contains('open')) return;
@@ -991,14 +1011,13 @@ ol.takeaways li::marker {
     dx < 0 ? next() : prev();
   }, {passive: true});
 
-  /* ---------- Picker backdrop click to close ---------- */
   picker.addEventListener('click', function(e){
     if(e.target === picker) closePicker();
   });
 
-  /* ---------- Init ---------- */
   updateUI();
 })();
 </script>
+
 </body>
 </html>
